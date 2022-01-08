@@ -1,14 +1,14 @@
 import { Container } from "./styles";
 import { useEffect } from 'react'
+import { api } from '../../services/api'
 
-const apiUrl = 'http://localhost:3000';
+
 
 export const Transactions = () => {
 
     useEffect(() => {
-        fetch(`${apiUrl}/api/transactions`)
-            .then(response => response.json())
-            .then(data => console.log(data))
+        api.get(`/transactions`)
+            .then(response => console.log(response.data))
     },[]);
 
     return (

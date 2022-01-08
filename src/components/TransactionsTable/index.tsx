@@ -1,6 +1,16 @@
 import { Container } from "./styles";
+import { useEffect } from 'react'
+
+const apiUrl = 'http://localhost:3000';
 
 export const Transactions = () => {
+
+    useEffect(() => {
+        fetch(`${apiUrl}/api/transactions`)
+            .then(response => response.json())
+            .then(data => console.log(data))
+    },[]);
+
     return (
         <Container>
             <table>

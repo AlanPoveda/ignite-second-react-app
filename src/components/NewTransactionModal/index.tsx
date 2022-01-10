@@ -1,8 +1,10 @@
 import Modal from "react-modal";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
-import { Container, TransactionTypeContainer } from "./styles";
 import closeButton from "../../assets/close.svg";
+import { useState } from "react";
+
+import { Container, TransactionTypeContainer, RadioBox } from "./styles";
 
 interface NewTransactionModalProps {
     isOpen: boolean;
@@ -13,6 +15,8 @@ export const NewTransactionModal = ({
     isOpen,
     onRequestClose,
 }: NewTransactionModalProps) => {
+    const [type, setType] = useState("income");
+
     return (
         <Modal
             isOpen={isOpen}
@@ -32,15 +36,31 @@ export const NewTransactionModal = ({
                 <input placeholder="Title" />
                 <input placeholder="Amount" type="number" />
                 <TransactionTypeContainer>
-                    <button type="button">
+                    <RadioBox
+                        type="button"
+                        isActive={type === "income"}
+                        activeColor="green"
+                        onClick={() => {
+                            setType("income");
+                        }}
+                        
+                    >
                         <img src={incomeImg} alt="Income" />
                         <span>Income</span>
-                    </button>
+                    </RadioBox>
 
-                    <button type="button">
+                    <RadioBox
+                        type="button"
+                        isActive={type === "outcome"}
+                        activeColor="red"
+                        onClick={() => {
+                            setType("outcome");
+                        }}
+                        
+                    >
                         <img src={outcomeImg} alt="Outcome" />
                         <span>Outcome</span>
-                    </button>
+                    </RadioBox>
                 </TransactionTypeContainer>
                 <input placeholder="Category" />
                 <button type="submit">Insert</button>

@@ -23,8 +23,8 @@ createServer({
           id: 2,
           title: 'transactions 2',
           amount: 400,
-          type: 'outcome',
-          category: 'Home',
+          type: 'income',
+          category: 'Salary',
           date: '02/01/2022'
         }
       ]

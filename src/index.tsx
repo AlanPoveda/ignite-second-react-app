@@ -16,7 +16,7 @@ createServer({
         {
           id: 1,
           title: 'Freelance',
-          type: 'deposit',
+          type: 'income',
           category: 'Dev',
           amount: 400,
           createAt: new Date('2022-02-01 08:00:00') 
@@ -24,7 +24,7 @@ createServer({
         {
           id: 2,
           title: 'Alugel',
-          type: 'withdraw',
+          type: 'outcome',
           category: 'Movel',
           amount: 1000,
           createAt: new Date('2022-01-10 09:00:00') 
@@ -62,8 +62,3 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
-
-/*
-  
-
-*/

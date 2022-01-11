@@ -1,13 +1,13 @@
 import { Container } from "../Dashboard/styles";
 import { Summary } from "../Summary";
-import { Transactions } from "../TransactionsTable";
+import { TransactionsTable } from "../TransactionsTable";
 
 export const Dashboard = () => {
     return(
         <>
             <Container>
                 <Summary />
-                <Transactions />
+                <TransactionsTable />
             </Container>
         </>
     );

@@ -1,14 +1,16 @@
-import { FormEvent } from "react";
+import { FormEvent, useState, useContext } from "react";
 import Modal from "react-modal";
+import { api } from "../../services/api";
+import { TransactionContext } from "../../TransactionContext";
+
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
 import closeButton from "../../assets/close.svg";
-import { useState } from "react";
-
-//import api from '../../services/api'
 
 import { Container, TransactionTypeContainer, RadioBox } from "./styles";
-import { api } from "../../services/api";
+
+
+
 
 interface NewTransactionModalProps {
     isOpen: boolean;
@@ -19,23 +21,29 @@ export const NewTransactionModal = ({
     isOpen,
     onRequestClose,
 }: NewTransactionModalProps) => {
-    const [title, setTitle] = useState("");
-    const [value, setValue] = useState(0);
+    const { createTransaction } = useContext(TransactionContext);
+    const [ title, setTitle ] = useState("") 
+    const [ amount, setAmount ] = useState(0);
     const [category, setCategory] = useState("");
-
     const [type, setType] = useState("income");
 
-    function handleCrateNewTransaction(event: FormEvent) {
+    async function handleCrateNewTransaction(event: FormEvent) {
         event.preventDefault();
 
-        const data = {
+        await createTransaction({
             title,
-            value,
+            amount, 
             category,
             type
-        }
+        })
 
-        api.post('/transactions', data);
+        setTitle('');
+        setAmount(0);
+        setCategory('');
+        setType('income')
+
+        onRequestClose()
+        
     }
 
     return (
@@ -62,8 +70,8 @@ export const NewTransactionModal = ({
                 <input
                     placeholder="Value"
                     type="number"
-                    value={value}
-                    onChange={(event) => setValue(Number(event.target.value))}
+                    value={amount}
+                    onChange={(event) => setAmount(Number(event.target.value))}
                 />
                 <TransactionTypeContainer>
                     <RadioBox
